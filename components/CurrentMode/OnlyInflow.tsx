@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { Props } from "@/shared/props/type";
+import { Props } from "@/shared/type/type";
 
 export default function InFlow({ result }: Props) {
   return (

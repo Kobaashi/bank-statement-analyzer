@@ -1,5 +1,5 @@
 import { GetTopFiveByOutFlow } from "@/lib/statement";
-import { Props } from "@/shared/props/type";
+import { Props } from "@/shared/type/type";
 import {
   Table,
   TableBody,

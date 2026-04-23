@@ -1,22 +1,47 @@
-import { Props } from "@/shared/props/type";
+import { StatementStats, Transaction } from "@/shared/type/statement";
 
-export function GetTopFiveByOutFlow({ result }: Props) {
-  if (!result || !Array.isArray(result)) return [];
+export function calculateStatementStats(result: Transaction[]): StatementStats {
+  if (!result || !Array.isArray(result)) {
+    return {
+      income: 0,
+      expense: 0,
+      netResult: 0,
+      count: 0,
+    };
+  }
 
-  const filtered = result.filter((res: any) => {
-    const amountStr = res.amount || res.Amount;
-    const name = res.counterparty || res.Counterparty;
+  const stats = result.reduce(
+    (acc, t) => {
+      const val =
+        typeof t.amount === "string" ? parseFloat(t.amount) : t.amount;
 
-    const amount = parseFloat(amountStr);
+      if (!isNaN(val)) {
+        if (val > 0) acc.income += val;
+        else acc.expense += Math.abs(val);
+      }
+      return acc;
+    },
+    { income: 0, expense: 0 },
+  );
 
-    return name && !isNaN(amount) && amount < 0;
-  });
+  return {
+    ...stats,
+    netResult: stats.income - stats.expense,
+    count: result.length,
+  };
+}
 
-  return filtered
-    .sort((a: any, b: any) => {
-      const amtA = parseFloat(a.amount || a.Amount);
-      const amtB = parseFloat(b.amount || b.Amount);
-      return amtA - amtB;
-    })
+export function GetTopFiveByOutFlow({
+  result,
+}: {
+  result: Transaction[];
+}): Transaction[] {
+  if (!result || !Array.isArray(result)) {
+    return [];
+  }
+
+  return [...result]
+    .filter((t) => t.amount < 0)
+    .sort((a, b) => a.amount - b.amount)
     .slice(0, 5);
 }
