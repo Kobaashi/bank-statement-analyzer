@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { Transaction } from "@/shared/type/statement";
 import { Props } from "@/shared/type/type";
 
 export default function All({ result }: Props) {
@@ -26,7 +27,7 @@ export default function All({ result }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {result.map((res: any, index: any) => (
+          {result.map((res: Transaction, index: number) => (
             <TableRow key={index} className="hover:bg-muted/30">
               <TableCell className="font-medium px-4 py-3">
                 {res.date}

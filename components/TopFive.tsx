@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { cn } from "@/lib/utils";
+import { Transaction } from "@/shared/type/statement";
 
 export function TopFive({ result }: Props) {
   const filteredData = GetTopFiveByOutFlow({ result });
@@ -27,7 +28,7 @@ export function TopFive({ result }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredData.map((res: any, index: number) => (
+          {filteredData.map((res: Transaction, index: number) => (
             <TableRow key={index} className="hover:bg-muted/30">
               <TableCell className="font-medium px-4 py-3">
                 {res.date}

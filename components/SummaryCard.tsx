@@ -48,7 +48,6 @@ function Card({
   value: number;
   type: string;
 }) {
-  const isNegative = type === "net" && value < 0;
   const isCount = type === "count";
 
   return (

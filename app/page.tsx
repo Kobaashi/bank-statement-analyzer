@@ -32,7 +32,7 @@ export default function Home() {
           const validTransactions: Transaction[] = [];
           const errorLogs: string[] = [];
 
-          results.data.forEach((row: any, index: number) => {
+          results.data.forEach((row: unknown, index: number) => {
             const validation = TransactionSchema.safeParse(row);
             if (validation.success) {
               validTransactions.push(validation.data);

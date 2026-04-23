@@ -1,12 +1,17 @@
+import { Transaction } from "@/shared/type/statement";
+
 type State = {
-  transactions: any[];
+  transactions: Transaction[];
   skippedCount: number;
   status: "idle" | "parsing" | "success";
 };
 
 type Action =
   | { type: "START_PARSING" }
-  | { type: "SET_DATA"; payload: { transactions: any[]; skipped: number } }
+  | {
+      type: "SET_DATA";
+      payload: { transactions: Transaction[]; skipped: number };
+    }
   | { type: "RESET" };
 
 export function analyzerReducer(state: State, action: Action): State {

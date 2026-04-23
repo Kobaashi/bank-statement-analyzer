@@ -61,8 +61,14 @@ describe("GetTopFiveByOutFlow", () => {
   });
 
   it("should return an empty array if input data is invalid", () => {
-    expect(GetTopFiveByOutFlow({ result: null as any })).toEqual([]);
-    expect(GetTopFiveByOutFlow({ result: "not-an-array" as any })).toEqual([]);
+    expect(
+      GetTopFiveByOutFlow({ result: null as unknown as Transaction[] }),
+    ).toEqual([]);
+    expect(
+      GetTopFiveByOutFlow({
+        result: "not-an-array" as unknown as Transaction[],
+      }),
+    ).toEqual([]);
   });
 
   it("should ignore entries with a positive amount (not an expense)", () => {
